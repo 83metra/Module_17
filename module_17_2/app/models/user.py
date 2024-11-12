@@ -3,6 +3,8 @@ from sqlalchemy import Column, ForeignKey, Integer, String, Boolean# ForeignKey 
 from sqlalchemy.orm import relationship
 from app.models import *
 import app.models
+from task import Task
+
 
 class User(Base):
     __tablename__ = 'users'
