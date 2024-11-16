@@ -68,32 +68,13 @@ async def update_user(db: Annotated[Session, Depends(get_db)], user_id: int, upd
     }
 
 
-# @router.delete('/delete')
-# async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
-#     user = db.scalars(select(User).where(User.id == user_id))
-#     print(f'User.id: {User.id}, user_id: {user_id}')
-#     print(list(user))
-#     if user is not None:
-#         db.execute(delete(User).where(User.id == user_id))
-#         db.commit()
-#         return {
-#         'status_code': status.HTTP_200_OK,
-#         'transaction': 'Пользователь успешно удалён!'
-#         }
-#
-#     raise HTTPException(
-#         status_code= status.HTTP_404_NOT_FOUND,
-#         detail= 'Пользователь не найден'
-#         )
-
-
 @router.delete('/delete')
 async def delete_user(db: Annotated[Session, Depends(get_db)], user_id: int):
     user = db.scalars(select(User).where(User.id == user_id)).first()
 
     if user is not None:
         db.execute(delete(User).where(User.id == user_id))
-        # db.execute(delete(Task).where(Task.user.id == user_id))
+        # db.execute(delete(Task).where(Task.user_id == user_id))
         db.commit()
         return {
         'status_code': status.HTTP_200_OK,
