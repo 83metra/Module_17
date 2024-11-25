@@ -46,7 +46,7 @@ async def create_task(db: Annotated[Session, Depends(get_db)], user_id: int, cre
 
 @router.put('/update')
 async def update_task(db: Annotated[Session, Depends(get_db)], task_id: int, update_task: UpdateTask):
-    task = db.scalars(select(Task).where(Task.id == task_id))
+    task = db.scalar(select(Task).where(Task.id == task_id))
 
     if task is not None:
         db.execute(update(Task).where(Task.id == task_id).values(title = update_task.title,
